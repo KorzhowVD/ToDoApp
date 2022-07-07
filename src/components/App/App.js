@@ -1,24 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import Counter from "../Counter/Counter";
 
 function App() {
   
-  let likes = 5;
-
-  function increment() {
-    likes += 1;
-    console.log(likes)
-  }
-
-  function decrement() {
-    likes -= 1;
-    console.log(likes)
-  }
+  const [likes, setLikes] = useState(5)
+  // const [value, setValue] = useState('Текст в поле')
 
   return(
     <div>
-      <h1>{likes}</h1>
-      <button onClick={increment}>Увеличить</button>
-      <button onClick={decrement}>Уменьшить</button>
+      <Counter/>
     </div>
   )
 }
