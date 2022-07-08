@@ -1,0 +1,23 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+
+#root {
+	display: flex;
+	justify-content: center;
+}
+
+.wrapper {
+	width: 800px;
+}
+
+.post {
+	display: flex;
+	border: solid red 1px;
+	padding: 15px;
+	justify-content: space-between;
+	align-items: center;
+
+}
