@@ -20,5 +20,11 @@ body {
 	margin-bottom: 15px;
 	justify-content: space-between;
 	align-items: center;
+}
 
+.post__content {
+	display: flex;
+	flex-direction:column;
+	width: 600px;
+	hyphens: auto;
 }

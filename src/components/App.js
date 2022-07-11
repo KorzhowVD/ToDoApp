@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Counter from "./Counter/Counter";
 import "../styles/App.css"
 import PostItem from "./PostItem/PostItem";
@@ -14,12 +14,40 @@ function App() {
     {id:3, title: 'JavaScript3', description: 'JS - язык программирования'}
   ])
 
+  const [post, setPost] = useState ({title:'', description:''})
+
+
+  const addNewPost = (event) => {
+    // для того, чтобы не обновлялась страница после нажатия на кнопку
+    event.preventDefault() 
+    setPosts([...posts, {...post, id: Date.now()}])
+    setPost({title:'', description:''})
+  }
+  
+
   return(
     <div className="wrapper">
       <form>
-        <MyInput type="text" placeholder="Название поста" />
-        <MyInput type="text" placeholder="Описание поста" />
-        <MyButton>Создать пост</MyButton>
+        {/* Управляемый компонент */}
+        <MyInput 
+          value={post.title} 
+          onChange={event => setPost({...post, title: event.target.value})}
+          type="text" 
+          placeholder="Название поста" 
+        />
+        <MyInput
+          value={post.description} 
+          onChange={event => setPost({...post, description: event.target.value})}          
+          type="text" 
+          placeholder="Описание поста" 
+        />
+        {/* Неуправляемый/неконтролируемый компонент
+        <MyInput
+          ref={bodyInputRef}
+          type="text" 
+          placeholder="Описание поста" 
+        /> */}
+        <MyButton onClick={addNewPost}>Создать пост</MyButton>
       </form>
       <PostList posts={posts} title='Список 1'/>
     </div>
