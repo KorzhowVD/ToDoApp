@@ -7,6 +7,7 @@ import MyButton from "./UI/button/MyButton";
 import MyInput from "./UI/input/MyInput";
 import PostForm from "./PostForm/PostForm";
 import MySelect from "./UI/select/MySelect";
+import PostFilter from "./PostFilter/PostFilter";
 
 function App() {
   
@@ -45,21 +46,7 @@ function App() {
   return(
     <div className="wrapper">
       <PostForm create={createPost}/>
-      <MyInput
-        placeholder='Поиск...'
-        value={searchQuery}
-        onChange={event => setSearchQuery(event.target.value) }
-      />
-      <MySelect 
-        value={selectedSort}
-        defaultValue='Сортировка'
-        onChange={sortPost}
-        options={[
-          {value: 'title', name: 'По названию'},
-          {value: 'description', name: 'По описанию'}
-        ]} 
-
-      />
+      <PostFilter />
       {sortedAndSearchPosts.length !== 0
         ?
         <PostList remove={removePost} posts={sortedAndSearchPosts} title='Список 1'/>
