@@ -8,6 +8,7 @@ import MyInput from "./UI/input/MyInput";
 import PostForm from "./PostForm/PostForm";
 import MySelect from "./UI/select/MySelect";
 import PostFilter from "./PostFilter/PostFilter";
+import MyModal from "./UI/MyModal/MyModal";
 
 function App() {
   
@@ -17,45 +18,44 @@ function App() {
     {id:3, title: 'C++', description: 'Язык программирования'}
   ])
 
-  const [selectedSort, setSelectedSort] = useState('')
-  const [searchQuery, setSearchQuery] = useState('')
+  const [filter, setFilter] = useState({sort:'', query: ''})
+  const [modal, setModal] = useState(false)
+  
 
   const sortedPosts = useMemo(() => {
-    if (selectedSort) {
-      return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
+    if (filter.sort) {
+      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
     } 
     return posts;
-  }, [selectedSort, posts])
+  }, [filter.sort, posts])
 
   const sortedAndSearchPosts = useMemo (() => {
-    return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
-  }, [searchQuery, sortedPosts])
+    return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
+  }, [filter.query, sortedPosts])
 
   const createPost = (newPost) => {
     setPosts ([...posts, newPost])
+    setModal(false)
   }
 
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
-  const sortPost = (sort) => {
-    setSelectedSort(sort)
-  }
 
   return(
     <div className="wrapper">
-      <PostForm create={createPost}/>
-      <PostFilter />
-      {sortedAndSearchPosts.length !== 0
-        ?
-        <PostList remove={removePost} posts={sortedAndSearchPosts} title='Список 1'/>
-        :
-        <h1 style={{textAlign: 'center'}}>
-          Посты не найдены!
-        </h1>
-      }
-      
+      <MyButton onClick={() => setModal(true)}>
+        Создать пост
+      </MyButton>
+      <MyModal visible={modal} setVisible = {setModal}>
+        <PostForm create={createPost}/>
+      </MyModal>
+      <PostFilter 
+        filter={filter}
+        setFilter={setFilter}
+      />
+      <PostList remove={removePost} posts={sortedAndSearchPosts} title='Список 1'/>
     </div>
   )
 }

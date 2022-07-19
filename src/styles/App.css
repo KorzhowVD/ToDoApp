@@ -24,7 +24,7 @@ body {
 
 .post__content {
 	display: flex;
-	flex-direction:column;
+	flex-direction: column;
 	width: 600px;
 	hyphens: auto;
 }

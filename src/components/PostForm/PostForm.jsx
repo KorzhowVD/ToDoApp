@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import MyButton from '../UI/button/MyButton'
 import MyInput from '../UI/input/MyInput'
+import classes from '../PostForm/PostForm.module.css'
 
 const PostForm = ({create}) => {
 	const [post, setPost] = useState ({title:'', description:''})
@@ -17,7 +18,7 @@ const PostForm = ({create}) => {
   }
 
 	return (
-		<form>
+		<form className={classes.wrapperForm} >
 			{/* Управляемый компонент */}
 			<MyInput 
 				value={post.title} 
