@@ -4,7 +4,7 @@ import MyInput from '../UI/input/MyInput'
 import classes from '../PostForm/PostForm.module.css'
 
 const PostForm = ({create}) => {
-	const [post, setPost] = useState ({title:'', description:''})
+	const [post, setPost] = useState ({title:'', body:''})
 
 	const addNewPost = (event) => {
     // для того, чтобы не обновлялась страница после нажатия на кнопку
@@ -14,7 +14,7 @@ const PostForm = ({create}) => {
 			id: Date.now()
 		}
 		create(newPost)
-    setPost({title:'', description:''})
+    setPost({title:'', body:''})
   }
 
 	return (
@@ -27,8 +27,8 @@ const PostForm = ({create}) => {
 				placeholder="Название поста" 
 			/>
 			<MyInput
-				value={post.description} 
-				onChange={event => setPost({...post, description: event.target.value})}          
+				value={post.body} 
+				onChange={event => setPost({...post, body: event.target.value})}          
 				type="text" 
 				placeholder="Описание поста" 
 			/>
