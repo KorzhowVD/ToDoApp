@@ -43,3 +43,10 @@ body {
   transform: translateX(-350px);
   transition: all 500ms ease-in;
 }
+
+.wrapperPreloader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 100px;
+}
