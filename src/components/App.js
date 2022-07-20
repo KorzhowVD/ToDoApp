@@ -14,6 +14,7 @@ import axios from 'axios';
 import PostService from "../API/PostService";
 import Preloader from "./UI/preloader/Preloader";
 import { useFetcing } from "../hooks/useFetching";
+import { getPageCount, getPagesArray } from "../utils/pages";
 
 function App() {
   
@@ -22,9 +23,16 @@ function App() {
   const [filter, setFilter] = useState({sort:'', query: ''})
   const [modal, setModal] = useState(false)
   const sortedAndSearchPosts = usePosts(posts,filter.sort, filter.query)
+  const [totalPages, setTotalPages] = useState (0)
+  const [limit, setLimit] = useState(10)
+  const [page, setPage] = useState(1)
+  const pageArray = getPagesArray(totalPages)
+
   const [fetchPosts, isPostsLoading, postError] = useFetcing(async () => {
-    const posts = await PostService.getAll();
-    setPosts(posts)
+    const response = await PostService.getAll(limit, page);
+    setPosts(response.data)
+    const totalCount = response.headers['x-total-count']
+    setTotalPages(getPageCount(totalCount, limit))
   })
   
   const createPost = (newPost) => {
@@ -34,8 +42,11 @@ function App() {
 
   useEffect (() => {
     fetchPosts()
-    console.log('useEff')
-  }, [])
+  }, [page])
+
+  const changePage = (page) => {
+    setPage(page)
+  }
 
 
   const removePost = (post) => {
@@ -56,13 +67,22 @@ function App() {
         setFilter={setFilter}
       />
       {postError &&
-        <h1>Произошла ошибка ${postError}</h1>
+        <h1>Произошла ошибка: {postError}</h1>
       }
       {isPostsLoading
         ? <div className="wrapperPreloader"><Preloader/></div>
         : <PostList remove={removePost} posts={sortedAndSearchPosts} title='Список 1'/>
       }
-      
+      <div className="wrapperPage">
+        {pageArray.map(p => 
+          <button 
+            onClick={() => changePage(p)}
+            key={p} 
+            className={page === p ? 'pageNumber pageNumber__current' : 'pageNumber'}
+          >
+            {p}
+          </button>)}
+      </div>  
     </div>
   )
 }
