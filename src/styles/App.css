@@ -6,7 +6,9 @@ body {
 
 #root {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 }
 
 .wrapper {
@@ -76,3 +78,21 @@ body {
 	background-color: #000;
 	color:  #fff;
 }
+
+.navbar {
+  margin: 20px auto;
+}
+
+.navbar > a {
+	color: #949494;
+  text-decoration: none;
+  font-family: Inter,sans-serif;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: 0.2s ease color;
+}
+
+.navbar > a:hover {
+	color:  #000;
+}
+
