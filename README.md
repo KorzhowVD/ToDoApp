@@ -72,3 +72,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### Стек технологий:
 * Использование библиотеки Axios для создания запросов на сервер
 * Использование кастомных хуков
+* Реализована пагинация списка постов
