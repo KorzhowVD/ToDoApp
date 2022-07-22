@@ -31,6 +31,13 @@ body {
 	hyphens: auto;
 }
 
+.post__btn {
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+	justify-content: flex-end;
+}
+
 .post-enter {
   transform: translateX(-350px);
 }

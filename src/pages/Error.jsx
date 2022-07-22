@@ -4,7 +4,7 @@ import React from 'react'
 function Error() {
 	return (
 		<div>
-			Ошибка 404
+			<h1>Ошибка 404</h1>
 		</div>
 	)
 }
