@@ -36,7 +36,7 @@ const PostIdPage = () => {
 					? <Preloader/>
 					: <div>
 						{comments.map(comm => 
-							<div style={{marginTop: 15}}>
+							<div key={comm.id} style={{marginTop: 15}}>
 								<h3>{comm.email}</h3>
 								<div>{comm.body}</div>
 							</div>

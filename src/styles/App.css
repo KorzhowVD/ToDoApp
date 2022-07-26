@@ -87,7 +87,7 @@ body {
 }
 
 .navbar {
-  margin: 20px auto;
+  margin: 20px auto; 
 }
 
 .navbar > a {
@@ -102,4 +102,11 @@ body {
 .navbar > a:hover {
 	color:  #000;
 }
+
+.headerWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 

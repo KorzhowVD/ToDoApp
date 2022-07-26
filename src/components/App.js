@@ -2,13 +2,35 @@ import { BrowserRouter } from "react-router-dom";
 import "../styles/App.css"
 import Navbar from './UI/navbar/Navbar';
 import AppRouter from './AppRouter/AppRouter';
+import { AuthContext } from "../context";
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false)
+  //Состояние с индикацией о том, закончился ли запрос на сервер о проверки на авторизованность
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect (() => {
+    if (localStorage.getItem('auth')) {
+      setIsAuth(true)      
+    }
+    setIsLoading(false)
+  }, [])
+
   return (
-    <BrowserRouter>     
-      <Navbar/> 
-      <AppRouter/>
-    </BrowserRouter>
+    <AuthContext.Provider value={
+      {
+        isAuth,
+        setIsAuth,
+        isLoading
+      }
+    }>
+      <BrowserRouter>     
+        <Navbar/> 
+        <AppRouter/>
+      </BrowserRouter>
+    </AuthContext.Provider>
   )
 }
 
